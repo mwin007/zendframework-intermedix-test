@@ -1,0 +1,57 @@
+<h2>Update <?php echo sprintf("%s %s", $this->record->FirstName, $this->record->LastName); ?></h2>
+<br /><br />
+<form class="form-horizontal" method="post" action="/application/index/edit" role="form">    
+
+    <fieldset>
+
+
+        <legend>User Details </legend>
+
+        <?php if ($this->msg == "") : ?>
+
+            <div class="form-group">            
+                <label class="col-md-4 control-label" id="lb_married">Married</label>  
+                <div class="col-md-4">
+                    <input id="IsMarried" name="IsMarried" type="checkbox" class="form-control input-md" value="1" <?php echo $this->isEqual(1, $this->record->IsMarried, 'checked'); ?>>                    
+                    <input type="hidden" name="PersonId" value="<?php echo $this->record->PersonId; ?>" />
+                </div>
+            </div>
+
+            <!-- Text input-->
+            <div class="form-group">
+                <label class="col-md-4 control-label" id="lb_enabled">Enabled</label>  
+                <div class="col-md-4">
+                    <input id="IsInsured" name="IsInsured" type="checkbox" class="form-control input-md" value="1" <?php echo $this->isEqual(1, $this->record->IsInsured, 'checked'); ?>>                    
+                </div>
+            </div>
+
+            <legend>Favourite Doctors</legend>
+            <?php foreach ($this->doctors as $colour) : ?>
+                <div class="form-group">
+                    <label class="col-md-4 control-label" ><?php echo $colour->Name; ?></label>  
+                    <div class="col-md-4">
+                        <input name="doctors[]" type="checkbox" class="form-control input-md" value="<?php echo $colour->DoctorId; ?>" <?php echo ($this->record->Doctors->contains($colour)) ? 'checked' : ''; ?>>                                        
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="submitbtn"></label>
+                <div class="col-md-4">
+                    <button type="submit" id="submitbtn" name="submitbtn" class="btn btn-primary">Edit</button>
+                    <a href="/application/index/index" class="btn btn-default active">Cancel</a>
+                </div>
+            </div>
+
+        <?php else : ?>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">&nbsp;</label>
+                <div class="col-sm-10">
+                    <p class="form-control-static"><?php echo $this->msg; ?></p>
+                </div>
+            </div>
+        <?php endif; ?>
+        <!-- Button -->
+
+    </fieldset>
+
+</form>

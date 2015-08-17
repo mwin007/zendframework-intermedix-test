@@ -1,0 +1,12 @@
+body {
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.greenText { color: green; }
+.redText { color: red; }
+
+
+.hideme {
+    visibility: hidden;
+}

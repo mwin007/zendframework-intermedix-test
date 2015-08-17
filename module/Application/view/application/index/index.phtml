@@ -1,0 +1,60 @@
+<fieldset>
+
+    <!-- Form Name -->
+    <legend>Patient Records</legend>
+
+    <table class="table table-bordered table-hover" >
+        <thead>
+            <tr>                
+                <th>Name</th>
+                <th>Under 18 Age</th>
+                <th>Married</th>
+                <th>Insured</th>
+                <th>Doctors Assigned</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php foreach ($this->records as $record): ?>
+                <tr>                    
+                    <td><a href="<?php echo $this->url('application/default', array('controller' => 'index', 'action' => 'edit', 'id' => $record->PersonId)) ?>" ><?php echo sprintf("%s %s", $record->FirstName, $record->LastName); ?></a></td>
+                    <td class="<?php echo ($this->isUnder18($record->FirstName . $record->LastName)) ? 'greenText' : 'redText'; ?>"><?php echo ($this->isUnder18($record->FirstName . $record->LastName)) ? 'Yes' : 'No'; ?></td>
+                    <td class="<?php echo ($record->IsMarried) ? 'greenText' : 'redText'; ?>"><?php echo ($record->IsMarried) ? 'Yes' : 'No'; ?></td>
+                    <td class="<?php echo ($record->IsInsured) ? 'greenText' : 'redText'; ?>"><?php echo ($record->IsInsured) ? 'Yes' : 'No'; ?></td>
+                    <td class="col-md-3">
+
+                        <?php
+                        $doctors = [];
+                        foreach ($record->Doctors as $doctor)
+                            $doctors[] = $doctor->Name;
+                        asort($doctors);
+                        echo implode(", ", $doctors);
+                        ?>
+
+
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+        </tbody>
+        <tfoot>
+            <tr>            
+                <td colspan="6" align="center">&nbsp;</td>
+            </tr>
+        </tfoot>
+    </table>
+
+</fieldset>
+<?php
+echo $this->paginationControl(
+        // the paginator object
+        $this->records,
+        // the scrolling style
+        'sliding',
+        // the partial to use to render the control
+        array('partial/paginator.phtml', ''),
+        // the route to link to when a user clicks a control link
+        array(
+    'route' => 'application/default',
+    'actionController' => array('controller' => 'index', 'action' => 'index')
+        )
+);
+?>

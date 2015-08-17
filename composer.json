@@ -1,0 +1,24 @@
+{
+    "name": "zendframework/intermedix-test",
+    "description": "Skeleton Application for ZF2",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "framework",
+        "zf2"
+    ],
+    "authors": [
+        {
+            "name":      "Hinh Martin Nguyen",
+            "email":     "martin.nguyen@dragonitinc.com",
+            "homepage":  "http://dragonitinc.com/",
+            "role":      "Developer"
+        }
+    ],
+    "homepage": "http://framework.zend.com/",
+    "require": {
+        "php": ">=5.3.3",
+        "zendframework/zendframework": "2.3.*",
+        "doctrine/doctrine-orm-module": "0.8.*",
+        "zendframework/zend-developer-tools": "dev-master"
+    }
+}
